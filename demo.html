@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>A simple tooltip widget</title>
+	<meta charset="utf-8" />
+
+	<link media="all" rel="stylesheet" type="text/css" href="styles/tooltip.css" />
+	<style type="text/css" media="all">
+		body {
+			margin: 0;
+			padding: 0;
+    }
+    .container{
+      width: 500px;
+      margin: 100px auto;
+		}
+    .tooltip{
+      margin: 20px auto;
+      width: 100px;
+      padding: 20px;
+      border:solid 1px lightblue;
+    }
+
+	</style>
+
+</head>
+
+<body>
+
+<div class="container">
+  <div class="tooltip">Top tip</div>
+  <div class="tooltip">Bottom tip</div>
+  <div class="tooltip">Left tip</div>
+  <div class="tooltip">Right tip</div>
+  <div class="tooltip">auto tip</div>
+</div>
+</body>
+
+<script type="text/javascript" src="vendor/bower/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="lib/module.js"></script>
+<script type="text/javascript" src="lib/tooltip.js"></script>
+<script type="text/javascript">
+
+s=["top","bottom","left","right"];
+
+$('.tooltip').each(function(i,e){
+  simple.tooltip({
+    el:e,
+    content:"this is the tooltip!!",
+    position:s[i] || "auto"
+  })
+})
+
+
+</script>
+</html>

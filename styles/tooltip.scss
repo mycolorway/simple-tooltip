@@ -1,0 +1,55 @@
+$arrow-size:10px;
+$arrow-color:black;
+$transition-duration:150ms;
+
+.simple-tooltip{
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  left: -9999px;
+  z-index: -9999;
+  background: #000;
+  border-radius: 2px;
+  padding: 6px 0;
+
+  -webkit-transition: top $transition-duration, ease-in-out,left $transition-duration, ease-in-out,opacity $transition-duration, ease-in-out;
+  -moz-transition: top $transition-duration, ease-in-out,left $transition-duration, ease-in-out,opacity $transition-duration, ease-in-out;
+  transition: top $transition-duration, ease-in-out,left $transition-duration, ease-in-out,opacity $transition-duration, ease-in-out;
+
+  .arrow {
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top:-10px;
+    left:30%;
+    &.up{
+      border-left: $arrow-size solid transparent;
+      border-right: $arrow-size solid transparent;
+      border-bottom: $arrow-size solid $arrow-color;
+    }
+    &.down{
+      border-left: $arrow-size solid transparent;
+      border-right: $arrow-size solid transparent;
+      border-top: $arrow-size solid $arrow-color;
+    }
+    &.left{
+      border-top: $arrow-size solid transparent;
+      border-bottom: $arrow-size solid transparent;
+      border-right: $arrow-size solid $arrow-color;
+    }
+    &.right{
+      border-top: $arrow-size solid transparent;
+      border-bottom: $arrow-size solid transparent;
+      border-left: $arrow-size solid $arrow-color;
+    }
+  }
+
+  .content {
+    padding: 4px 12px;
+    font-size: 12px;
+    line-height: 12px;
+    color: #ffffff;
+    white-space: nowrap;
+  }
+
+}
