@@ -13,4 +13,4 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-script
-  sass
+  sass (= 3.4.2)
