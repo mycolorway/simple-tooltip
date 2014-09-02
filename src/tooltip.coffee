@@ -29,7 +29,7 @@ class Tooltip extends Widget
     if @opts.content == ""
       throw "Tooltip's content can't  be empty"
 
-    if @target.data('tooltip')
+    if typeof @target.data('tooltip') == 'object'
       @target.data('tooltip').destroy()
 
 
