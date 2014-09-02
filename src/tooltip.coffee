@@ -14,11 +14,11 @@ class Tooltip extends Widget
   """
 
   #arrow三角形的底与高,与scss文件中保持一致
-  arrowHeight:10
-  arrowBase: 20
+  arrowHeight:5
+  arrowBase: 10
 
-  #鼠标mouseenter进入target元素时,tooltip transition的距离
-  transitionSize:15
+  #tooltip show的时候相对于target的偏移距离
+  offset:10
 
   #position代表tooltip相对于element的方向,top,bottom,left,right
   _init: () ->
@@ -38,7 +38,6 @@ class Tooltip extends Widget
     @left = 0
 
     @_render()
-    @_bind()
 
 
 
@@ -64,16 +63,16 @@ class Tooltip extends Widget
 
     if @position == "auto"
 
-      if @targetOffset.top + @targetHeight + @tooltipHeight + @arrowHeight + @transitionSize < viewportHeigth + scrollTop
+      if @targetOffset.top + @targetHeight + @tooltipHeight + @arrowHeight + @offset < viewportHeigth + scrollTop
         return @setPosition "bottom"
 
-      if @targetOffset.top - @tooltipHeight - @arrowHeight - @transitionSize > 0
+      if @targetOffset.top - @tooltipHeight - @arrowHeight - @offset > 0
         return @setPosition "top"
 
-      if @targetOffset.left - @tooltipWidth - @arrowHeight - @transitionSize > 0
+      if @targetOffset.left - @tooltipWidth - @arrowHeight - @offset > 0
         return @setPosition "left"
 
-      if @targetOffset.left + @targetWidth + @tooltipWidth + @arrowHeight + @transitionSize < viewportWidth + scrollLeft
+      if @targetOffset.left + @targetWidth + @tooltipWidth + @arrowHeight + @offset < viewportWidth + scrollLeft
         return @setPosition "right"
 
     else
@@ -130,37 +129,36 @@ class Tooltip extends Widget
           left: @tooltipWidth
           top: @tooltipHeight/2 - @arrowBase/2
 
-  _bind: ->
-    @target.on 'mouseenter.tooltip',=>
-      @el.css
-        opacity:1
-        "z-index":9999
+  show:->
+    @el.css
+      opacity:1
+      "z-index":9999
 
-      switch @position
-        when 'top'
-          @el.css
-            top: @top - @transitionSize
-        when 'bottom'
-          @el.css
-            top: @top + @transitionSize
-        when 'left'
-          @el.css
-            left: @left - @transitionSize
-        when 'right'
-          @el.css
-            left: @left + @transitionSize
+    switch @position
+      when 'top'
+        @el.css
+          top: @top - @offset
+      when 'bottom'
+        @el.css
+          top: @top + @offset
+      when 'left'
+        @el.css
+          left: @left - @offset
+      when 'right'
+        @el.css
+          left: @left + @offset
 
-    @target.on 'mouseleave.tooltip',=>
-      @el.css
-        opacity:0
-        "z-index":-9999
-      @el.css
-        left:@left
-        top:@top
+  hide:->
+    @el.css
+      opacity:0
+      "z-index":-9999
+    @el.css
+      left:@left
+      top:@top
 
   destroy: () ->
     @el.remove()
-    @target.off('.tooltip')
+    @target.removeData 'tooltip'
 
 
 

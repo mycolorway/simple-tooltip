@@ -44,12 +44,19 @@
 s=["top","bottom","left","right"];
 
 $('.tooltip').each(function(i,e){
-  simple.tooltip({
-    el:e,
-    content:"this is the tooltip!!",
-    position:s[i] || "auto"
+  var t = simple.tooltip({
+            el:e,
+            content:"this is the tooltip!!",
+            position:s[i] || "auto"
+          });
+  $(e).on('mouseenter',function(e){
+    t.show();
+  });
+  $(e).on('mouseleave',function(e){
+    t.hide();
   })
 })
+
 
 
 </script>
