@@ -29,8 +29,8 @@ class Tooltip extends Widget
     if @opts.content == ""
       throw "Tooltip's content can't  be empty"
 
-    if typeof @target.data('tooltip') == 'object'
-      @target.data('tooltip').destroy()
+    if @target.data('simple-tooltip')
+      @target.data('simple-tooltip').destroy()
 
 
     @position = @opts.position
@@ -38,6 +38,7 @@ class Tooltip extends Widget
     @left = 0
 
     @_render()
+    @_bind()
 
 
 
@@ -46,7 +47,7 @@ class Tooltip extends Widget
     $(".content",@el).text(@opts.content)
     @arrow = $('.arrow',@el)
     @el.appendTo 'body'
-    @target.data "tooltip",@
+    @target.data "simple-tooltip",@
 
     viewportWidth = $(window).width()
     scrollTop = $(window).scrollTop()
@@ -78,6 +79,7 @@ class Tooltip extends Widget
     else
       @setPosition @opts.position
 
+
   setPosition:(pos)->
     switch pos
       when 'bottom'
@@ -104,10 +106,6 @@ class Tooltip extends Widget
         @top = @targetOffset.top + (@targetHeight - @tooltipHeight)*0.5
         @setArrow "left"
 
-    @el.css
-      left:@left
-      top:@top
-
   setArrow:(orientation)->
     @arrow.addClass orientation
     switch orientation
@@ -131,8 +129,12 @@ class Tooltip extends Widget
 
   show:->
     @el.css
-      opacity:1
-      "z-index":9999
+      left:@left
+      top:@top
+      opacity:0
+    @el.show()
+    @el.addClass 'transition'
+    @el[0].offsetHeight  #force reflow
 
     switch @position
       when 'top'
@@ -147,16 +149,24 @@ class Tooltip extends Widget
       when 'right'
         @el.css
           left: @left + @offset
+    @el.css
+      opacity:1
 
   hide:->
     @el.css
       opacity:0
-      "z-index":-9999
-    @el.css
       left:@left
       top:@top
 
-  destroy: () ->
+  _bind:->
+    @el.on 'transitionend webkitTransitionEnd',=>
+      if @el.css('opacity') == "0"
+        @el.removeClass 'transition'
+        @el.hide()
+
+
+
+  destroy:->
     @el.remove()
     @target.removeData 'tooltip'
 

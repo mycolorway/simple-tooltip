@@ -1,5 +1,5 @@
 $arrow-size:5px;
-$arrow-color:black;
+$color:black;
 $transition-duration:150ms;
 
 .simple-tooltip{
@@ -7,14 +7,17 @@ $transition-duration:150ms;
   opacity: 0;
   top: 0;
   left: -9999px;
-  z-index: -9999;
-  background: #000;
+  z-index: 9999;
+  display: none;
+  background: $color;
   border-radius: 2px;
   padding: 6px 0;
 
-  -webkit-transition: top $transition-duration, ease-in-out,left $transition-duration, ease-in-out,opacity $transition-duration, ease-in-out;
-  -moz-transition: top $transition-duration, ease-in-out,left $transition-duration, ease-in-out,opacity $transition-duration, ease-in-out;
-  transition: top $transition-duration, ease-in-out,left $transition-duration, ease-in-out,opacity $transition-duration, ease-in-out;
+  &.transition{
+    -webkit-transition: top $transition-duration, ease-in-out,left $transition-duration, ease-in-out,opacity $transition-duration, ease-in-out;
+    -moz-transition: top $transition-duration, ease-in-out,left $transition-duration, ease-in-out,opacity $transition-duration, ease-in-out;
+    transition: top $transition-duration, ease-in-out,left $transition-duration, ease-in-out,opacity $transition-duration, ease-in-out;
+  }
 
   .arrow {
     width: 0px;
@@ -25,22 +28,22 @@ $transition-duration:150ms;
     &.up{
       border-left: $arrow-size solid transparent;
       border-right: $arrow-size solid transparent;
-      border-bottom: $arrow-size solid $arrow-color;
+      border-bottom: $arrow-size solid $color;
     }
     &.down{
       border-left: $arrow-size solid transparent;
       border-right: $arrow-size solid transparent;
-      border-top: $arrow-size solid $arrow-color;
+      border-top: $arrow-size solid $color;
     }
     &.left{
       border-top: $arrow-size solid transparent;
       border-bottom: $arrow-size solid transparent;
-      border-right: $arrow-size solid $arrow-color;
+      border-right: $arrow-size solid $color;
     }
     &.right{
       border-top: $arrow-size solid transparent;
       border-bottom: $arrow-size solid transparent;
-      border-left: $arrow-size solid $arrow-color;
+      border-left: $arrow-size solid $color;
     }
   }
 
