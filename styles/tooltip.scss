@@ -3,21 +3,17 @@ $color:black;
 $transition-duration:150ms;
 
 .simple-tooltip{
+  display: none;
   position: absolute;
-  opacity: 0;
   top: 0;
   left: -9999px;
   z-index: 9999;
   display: none;
   background: $color;
-  border-radius: 2px;
-  padding: 6px 0;
-
-  &.transition{
-    -webkit-transition: top $transition-duration, ease-in-out,left $transition-duration, ease-in-out,opacity $transition-duration, ease-in-out;
-    -moz-transition: top $transition-duration, ease-in-out,left $transition-duration, ease-in-out,opacity $transition-duration, ease-in-out;
-    transition: top $transition-duration, ease-in-out,left $transition-duration, ease-in-out,opacity $transition-duration, ease-in-out;
-  }
+  border-radius: 3px;
+  -webkit-transition: top $transition-duration, ease-in-out,left $transition-duration, ease-in-out,opacity $transition-duration, ease-in-out;
+  -moz-transition: top $transition-duration, ease-in-out,left $transition-duration, ease-in-out,opacity $transition-duration, ease-in-out;
+  transition: top $transition-duration, ease-in-out,left $transition-duration, ease-in-out,opacity $transition-duration, ease-in-out;
 
   .arrow {
     width: 0px;
@@ -48,7 +44,7 @@ $transition-duration:150ms;
   }
 
   .content {
-    padding: 4px 12px;
+    padding: 8px 12px;
     font-size: 12px;
     line-height: 12px;
     color: #ffffff;

@@ -10,7 +10,7 @@ class Tooltip extends Widget
     <div class="simple-tooltip">
       <div class="arrow"></div>
       <div class="content"></div>
-    <div>
+    </div>
   """
 
   #arrow三角形的底与高,与scss文件中保持一致
@@ -33,22 +33,19 @@ class Tooltip extends Widget
       @target.data('simple-tooltip').destroy()
 
 
-    @position = @opts.position
+    @position = null
     @top = 0
     @left = 0
 
     @_render()
-    @_bind()
-
-
 
   _render: () ->
     @el = $(@tpl)
-    $(".content",@el).text(@opts.content)
-    @arrow = $('.arrow',@el)
-    @el.appendTo 'body'
-    @target.data "simple-tooltip",@
+    @el.find('.content').html(@opts.content)
+    @arrow = @el.find('.arrow')
+    @target.data "simple-tooltip", @
 
+  setPosition:()->
     viewportWidth = $(window).width()
     scrollTop = $(window).scrollTop()
     viewportHeigth = $(window).height()
@@ -61,53 +58,42 @@ class Tooltip extends Widget
     @tooltipWidth = @el.outerWidth()
     @tooltipHeight = @el.outerHeight()
 
-
+    @position = @opts.position
     if @position == "auto"
-
       if @targetOffset.top + @targetHeight + @tooltipHeight + @arrowHeight + @offset < viewportHeigth + scrollTop
-        return @setPosition "bottom"
+        @position = 'bottom'
+      else if @targetOffset.top - @tooltipHeight - @arrowHeight - @offset > 0
+        @position = 'top'
+      else if @targetOffset.left - @tooltipWidth - @arrowHeight - @offset > 0
+        @position = 'left'
+      else if @targetOffset.left + @targetWidth + @tooltipWidth + @arrowHeight + @offset < viewportWidth + scrollLeft
+        @position = 'right'
 
-      if @targetOffset.top - @tooltipHeight - @arrowHeight - @offset > 0
-        return @setPosition "top"
-
-      if @targetOffset.left - @tooltipWidth - @arrowHeight - @offset > 0
-        return @setPosition "left"
-
-      if @targetOffset.left + @targetWidth + @tooltipWidth + @arrowHeight + @offset < viewportWidth + scrollLeft
-        return @setPosition "right"
-
-    else
-      @setPosition @opts.position
-
-
-  setPosition:(pos)->
-    switch pos
+    switch @position
       when 'bottom'
-        @position = "bottom"
         @left = @targetOffset.left + (@targetWidth - @tooltipWidth)*0.5
         @top = @targetOffset.top + @targetHeight + @arrowHeight
         @setArrow 'up'
 
       when 'top'
-        @position = "top"
         @left = @targetOffset.left + (@targetWidth - @tooltipWidth)*0.5
         @top = @targetOffset.top - @tooltipHeight - @arrowHeight
         @setArrow 'down'
 
       when 'left'
-        @position = "left"
         @left = @targetOffset.left - @tooltipWidth - @arrowHeight
         @top = @targetOffset.top + (@targetHeight - @tooltipHeight)*0.5
         @setArrow "right"
 
       when 'right'
-        @position = "right"
         @left = @targetOffset.left + @targetWidth + @arrowHeight
         @top = @targetOffset.top + (@targetHeight - @tooltipHeight)*0.5
         @setArrow "left"
 
   setArrow:(orientation)->
-    @arrow.addClass orientation
+    @arrow.removeClass 'up down left right'
+      .addClass orientation
+
     switch orientation
       when 'up'
         @arrow.css
@@ -128,42 +114,41 @@ class Tooltip extends Widget
           top: @tooltipHeight/2 - @arrowBase/2
 
   show:->
+    @el.appendTo 'body'
+    @setPosition()
     @el.css
-      left:@left
-      top:@top
+      left: @left
+      top: @top
       opacity:0
     @el.show()
-    @el.addClass 'transition'
     @el[0].offsetHeight  #force reflow
 
+    top = @top
+    left = @left
     switch @position
       when 'top'
-        @el.css
-          top: @top - @offset
+        top -= @offset
       when 'bottom'
-        @el.css
-          top: @top + @offset
+        top += @offset
       when 'left'
-        @el.css
-          left: @left - @offset
+        left -= @offset
       when 'right'
-        @el.css
-          left: @left + @offset
+        left += @offset
+
     @el.css
+      top: top
+      left: left
       opacity:1
 
   hide:->
     @el.css
-      opacity:0
-      left:@left
-      top:@top
+      opacity: 0
+      left: @left
+      top: @top
 
-  _bind:->
-    @el.on 'transitionend webkitTransitionEnd',=>
-      if @el.css('opacity') == "0"
-        @el.removeClass 'transition'
-        @el.hide()
-
+    @el.one 'transitionend webkitTransitionEnd', =>
+      @el.hide().remove()
+      @position = null
 
 
   destroy:->
@@ -171,10 +156,9 @@ class Tooltip extends Widget
     @target.removeData 'tooltip'
 
 
-
 window.simple ||= {}
 
-simple.tooltip=(opts)->
+simple.tooltip = (opts)->
   new Tooltip(opts)
 
 

@@ -41,21 +41,23 @@
 <script type="text/javascript" src="lib/tooltip.js"></script>
 <script type="text/javascript">
 
-s=["top","bottom","left","right"];
+var pos = ["top","bottom","left","right"];
 
-$('.tooltip').each(function(i,e){
-  var t = simple.tooltip({
-            el:e,
-            content:"this is the tooltip!!",
-            position:s[i] || "auto"
-          });
-  $(e).on('mouseenter',function(e){
-    t.show();
-  });
-  $(e).on('mouseleave',function(e){
-    t.hide();
-  })
-})
+$('.tooltip').each(function(i, el){
+    var t = simple.tooltip({
+        el: el,
+        content: "this is the tooltip!!",
+        position: pos[i] || "auto"
+    });
+
+    $(el).on('mouseenter', function(e){
+        t.show();
+    });
+
+    $(el).on('mouseleave', function(e){
+        t.hide();
+    });
+});
 
 
 
