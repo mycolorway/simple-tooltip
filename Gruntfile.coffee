@@ -34,8 +34,8 @@ module.exports = (grunt) ->
         tasks: ['coffee', 'umd']
       jasmine:
         files: [
-          'styles/checkbox.css'
-          'lib/checkbox.js'
+          'styles/tooltip.css'
+          'lib/tooltip.js'
           'specs/*.js'
         ],
         tasks: 'jasmine:test:build'
