@@ -1,4 +1,4 @@
-class Tooltip extends Widget
+class Tooltip extends SimpleModule
 
   opts:
     el:""
@@ -155,10 +155,5 @@ class Tooltip extends Widget
     @el.remove()
     @target.removeData 'tooltip'
 
-
-window.simple ||= {}
-
-simple.tooltip = (opts)->
+tooltip = (opts)->
   new Tooltip(opts)
-
-
