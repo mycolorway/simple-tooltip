@@ -1,6 +1,6 @@
 # Simple Tooltip
 
-一个简单的
+一个简单的Tooltip组件。
 
 依赖项：
 
