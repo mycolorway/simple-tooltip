@@ -18,8 +18,7 @@
 
 ```
 
-可以通过simple.dialog下的三个方法，实例化dialog组件
-
+使用tooltip方法实例化Tooltip对象:
 ```js
 simple.tooltip({
   el: $('.tooltip'),
