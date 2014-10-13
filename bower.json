@@ -3,7 +3,8 @@
   "version": "2.0.0",
   "homepage": "https://github.com/mycolorway/simple-tooltip",
   "authors": [
-    "CJ Ting <fatelovely1128@gmail.com"
+    "CJ Ting <fatelovely1128@gmail.com>",
+    "LCJ <emlcjnil@gmail.com>"
   ],
   "description": "a flexible tooltip widget",
   "main": "lib/tooltip.js",
@@ -20,7 +21,7 @@
     "README"
   ],
   "dependencies": {
-    "jquery": "~2.1.0",
-    "simple-module": "~2.0.0"
+    "jquery": "2.x",
+    "simple-module": "2.x"
   }
 }
