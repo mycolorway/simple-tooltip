@@ -14,11 +14,15 @@
   "license": "MIT",
   "ignore": [
     "**/.*",
+    "spec",
     "node_modules",
     "vendor",
+    "Gemfile",
+    "Gemfile.lock",
     "Gruntfile.coffee",
     "package.json",
-    "README"
+    "README.md",
+    "umd.hbs"
   ],
   "dependencies": {
     "jquery": "2.x",
