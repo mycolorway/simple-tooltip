@@ -50,6 +50,7 @@ module.exports = (grunt) ->
           vendor: [
             'vendor/bower/jquery/dist/jquery.min.js'
             'vendor/bower/simple-module/lib/module.js'
+            'vendor/bower/simple-util/lib/util.js'
           ]
 
     umd:
@@ -60,11 +61,11 @@ module.exports = (grunt) ->
         objectToExport: 'tooltip'
         globalAlias: 'tooltip'
         deps:
-          'default': ['$', 'SimpleModule']
-          amd: ['jquery', 'simple-module']
-          cjs: ['jquery', 'simple-module']
+          'default': ['$', 'SimpleModule', 'simpleUtil']
+          amd: ['jquery', 'simple-module', 'simple-util']
+          cjs: ['jquery', 'simple-module', 'simple-util']
           global:
-            items: ['jQuery', 'SimpleModule']
+            items: ['jQuery', 'SimpleModule', 'simple.util']
             prefix: ''
 
   grunt.loadNpmTasks 'grunt-contrib-sass'

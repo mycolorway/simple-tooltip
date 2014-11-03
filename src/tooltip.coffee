@@ -146,7 +146,7 @@ class Tooltip extends SimpleModule
       left: @left
       top: @top
 
-    @el.one 'transitionend webkitTransitionEnd', =>
+    @el.one simple.util.transitionEnd(), =>
       @el.hide().remove()
       @position = null
 
