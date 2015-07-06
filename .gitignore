@@ -18,6 +18,7 @@ node_modules
 .sass-cache
 .grunt
 .bundle
+Gemfile.lock
 vendor
 
 _SpecRunner.html
