@@ -1,13 +1,14 @@
 {
   "name": "simple-tooltip",
-  "version": "2.0.1",
+  "version": "2.0.2",
+  "main": "lib/tooltip.js",
   "description": "a simple tooltip widget",
   "repository": {
     "type": "git",
     "url": "git@github.com:mycolorway/simple-tooltip.git"
   },
   "author": "CJ Ting",
-  "license": "GPL",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/mycolorway/simple-tooltip/issues"
   },

@@ -135,20 +135,29 @@ class Tooltip extends SimpleModule
       when 'right'
         left += @offset
 
+    if @_hiding
+      @el.off '.tooltip-hiding'
+      @_hiding = false
+
     @el.css
       top: top
       left: left
       opacity:1
 
   hide:->
+    @el.off('.tooltip-hiding') if @_hiding
+
     @el.css
       opacity: 0
       left: @left
       top: @top
 
-    @el.one simple.util.transitionEnd(), =>
+    @_hiding = true
+
+    @el.one "#{simple.util.transitionEnd()}.tooltip-hiding", =>
       @el.hide().remove()
       @position = null
+      @_hiding = false
 
 
   destroy:->
