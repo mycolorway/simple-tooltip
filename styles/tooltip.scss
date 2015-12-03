@@ -11,9 +11,9 @@ $transition-duration:150ms;
   display: none;
   background: $color;
   border-radius: 3px;
-  -webkit-transition: top $transition-duration, ease-in-out,left $transition-duration, ease-in-out,opacity $transition-duration, ease-in-out;
-  -moz-transition: top $transition-duration, ease-in-out,left $transition-duration, ease-in-out,opacity $transition-duration, ease-in-out;
-  transition: top $transition-duration, ease-in-out,left $transition-duration, ease-in-out,opacity $transition-duration, ease-in-out;
+  -webkit-transition: top $transition-duration ease-in-out, left $transition-duration ease-in-out, opacity $transition-duration ease-in-out;
+  -moz-transition: top $transition-duration ease-in-out, left $transition-duration ease-in-out, opacity $transition-duration ease-in-out;
+  transition: top $transition-duration ease-in-out, left $transition-duration ease-in-out, opacity $transition-duration ease-in-out;
 
   .arrow {
     width: 0px;

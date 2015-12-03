@@ -7,9 +7,9 @@
   display: none;
   background: black;
   border-radius: 3px;
-  -webkit-transition: top 150ms, ease-in-out, left 150ms, ease-in-out, opacity 150ms, ease-in-out;
-  -moz-transition: top 150ms, ease-in-out, left 150ms, ease-in-out, opacity 150ms, ease-in-out;
-  transition: top 150ms, ease-in-out, left 150ms, ease-in-out, opacity 150ms, ease-in-out;
+  -webkit-transition: top 150ms ease-in-out, left 150ms ease-in-out, opacity 150ms ease-in-out;
+  -moz-transition: top 150ms ease-in-out, left 150ms ease-in-out, opacity 150ms ease-in-out;
+  transition: top 150ms ease-in-out, left 150ms ease-in-out, opacity 150ms ease-in-out;
 }
 .simple-tooltip .arrow {
   width: 0px;
