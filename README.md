@@ -54,7 +54,7 @@ String，tooltip出现的位置
 
 #### 方法
 
-__hide()__ 
+__show()__ 
 
 显示tooltip
 
