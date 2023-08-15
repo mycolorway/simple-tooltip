@@ -4,6 +4,7 @@ class Tooltip extends SimpleModule
     el:""
     content:""
     position:"auto"
+    raw:false
 
 
   tpl: """
@@ -41,7 +42,12 @@ class Tooltip extends SimpleModule
 
   _render: () ->
     @el = $(@tpl)
-    @el.find('.content').html(@opts.content)
+
+    if @opts.raw
+      @el.find('.content').text(@opts.content)
+    else
+      @el.find('.content').html(@opts.content)
+
     @arrow = @el.find('.arrow')
     @target.data "simple-tooltip", @
 
